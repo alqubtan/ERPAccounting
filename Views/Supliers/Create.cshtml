@@ -1,0 +1,59 @@
+﻿@model SamaERP.Models.ACCSupliers
+
+@{
+    ViewData["Title"] = "Add New Supplier";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="right_col" role="main">
+
+    <div class="x_content">
+
+        <br />
+
+        <form asp-route-area="Accounting" asp-controller="Supliers" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label>Supplier  Name</label>
+                <input asp-for="SuplierName" required type="text" class="form-control" id="inputAddress" placeholder="Supplier Name">
+                <span asp-validation-for="SuplierName" class="text-danger"></span>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Phone Number</label>
+                    <input asp-for="PhoneNo" type="text" class="form-control" id="inputEmail4" placeholder="Phone Number">
+                    <span asp-validation-for="PhoneNo" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>E-mail</label>
+                    <input asp-for="Email" type="email" class="form-control" id="inputPassword4" placeholder="E-mail">
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Address</label>
+                <input asp-for="Addr" type="text" class="form-control" id="inputAddress2" placeholder="Address........">
+                <span asp-validation-for="Addr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Supplier Specialization</label>
+                <input asp-for="SuplierType" type="text" class="form-control" id="inputAddress2" placeholder="Supplier Specialization">
+                <span asp-validation-for="SuplierType" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="AddedBy" value="gazwan" />
+            <input type="hidden" asp-for="AddingDate" value="@DateTime.UtcNow.AddHours(3)" />
+            <input type="hidden" asp-for="ActiveOrNot" value="1" />
+
+
+            <button type="submit" class="btn btn-success">Add New Supplier</button>
+
+        </form>
+
+
+    </div>
+
+    <br />
+    
+</div>

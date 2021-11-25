@@ -1,0 +1,49 @@
+﻿@model SamaERP.Models.ACCDepartments
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+
+<div class="right_col" role="main">
+
+
+    <div class="x_content">
+
+        <br />
+
+        <form asp-route-area="Accounting" asp-controller="Departments" asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label for="inputAddress">Department  Name</label>
+                <input asp-for="DepartmentName" required type="text" class="form-control" id="inputAddress" placeholder="Department Name">
+                <span asp-validation-for="DepartmentName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="inputAddress">Description</label>
+                <input asp-for="Disciption" type="text" class="form-control" id="inputAddress" placeholder="Description">
+                <span asp-validation-for="Disciption" class="text-danger"></span>
+            </div>
+
+
+            <input type="hidden" asp-for="AddedBy" />
+            <input type="hidden" asp-for="AddingDate" />
+            <input type="hidden" asp-for="ActiveOrNot" />
+
+
+            <button type="submit" class="btn btn-success">Update  Departement</button>
+
+        </form>
+
+
+    </div>
+
+    <br />
+
+
+
+
+</div>

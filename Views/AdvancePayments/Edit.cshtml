@@ -1,0 +1,86 @@
+﻿@model SamaERP.Models.ACCAdvancePayment
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+
+<div class="right_col" role="main">
+   
+
+        <div class="x_content">
+            <br />
+
+            <form asp-area="Accounting" asp-controller="AdvancePayments" asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label>Employee  Name</label>
+                    <select asp-for="EmployeeName" required asp-items="@ViewBag.Emplyees" class="pull-left select2_single  form-control">
+                        <option value=""> Choose Employee Name</option>
+                    </select>
+                    <span asp-validation-for="EmployeeName" class="text-danger"></span>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Amount</label>
+                        <input asp-for="Ammount" required type="number" class="form-control" placeholder="Advance Payment Amount ">
+                        <span asp-validation-for="Ammount" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Currency</label>
+                        <select asp-for="Currency" required class="pull-left select2_single  form-control">
+                            <option value="" selected> Choose Currency</option>
+                            <option value="USD">USD</option>
+                            <option value="IQD">IQD</option>
+                        </select>
+                        <span asp-validation-for="Currency" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputAddress2">Payment Reason</label>
+                    <textarea asp-for="PaymentReason" rows="8" class="form-control" id="inputPassword4" placeholder="Reason for payment"></textarea>
+                    <span asp-validation-for="PaymentReason" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label>Approved By </label>
+                    <input asp-for="ApprovedBy" type="text" class="form-control" placeholder="Approved By">
+                    <span asp-validation-for="ApprovedBy" class="text-danger"></span>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Added by</label>
+                        <input asp-for="AddedBy" required type="number" class="form-control" placeholder="Advance Payment Amount ">
+                        <span asp-validation-for="AddedBy" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label>Added by</label>
+                        <input asp-for="AddedBy" required type="number" class="form-control" placeholder="Advance Payment Amount ">
+                        <span asp-validation-for="AddedBy" class="text-danger"></span>
+
+                    </div>
+                </div>
+
+
+                <input asp-for="Remaining" type="hidden" >
+              
+                <input type="hidden" asp-for="ActiveOrNot" value="1" />
+                <input type="hidden" asp-for="ExchangeRate" />
+                <input type="hidden" asp-for="TotalOtherCurrency" />
+
+
+                <button type="submit" class="btn btn-success"> Update Advance Payments</button>
+
+
+            </form>
+
+
+        </div>
+
+</div>

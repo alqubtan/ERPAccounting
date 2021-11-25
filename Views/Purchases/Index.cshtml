@@ -1,0 +1,115 @@
+﻿@model IEnumerable<SamaERP.Models.ACCAdvancePayment>
+@{
+
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+
+<!-- page content -->
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h2>Sama ERP <small>Purchases List</small></h2>
+            </div>
+            <form asp-area="Accounting" asp-controller="Purchases" asp-action="Index" method="get">
+                <div class="title_right">
+                    <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                        <div class="input-group">
+                            <input name="SearchString" type="text" class="form-control" value="@ViewData["CurrentFilter"]" placeholder="Search for...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-secondary" type="submit">Search</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 ">
+                <div class="x_panel">
+
+                    <div class="x_content">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card-box table-responsive">
+                                    <table class="table table-bordered table-striped">
+                                        <thead style="background-color:white;">
+                                            <tr>
+                                                <th>
+                                                    <a asp-area="Accounting" asp-controller="EmployeeDetails" asp-action="Index" asp-route-sortOrder="@ViewData["Col1SortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Employee Name</a>
+                                                </th>
+                                                <th>
+                                                    <a asp-area="Accounting" asp-controller="EmployeeDetails" asp-action="Index" asp-route-sortOrder="@ViewData["Col2SortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Payment Reason</a>
+                                                </th>
+                                                <th>
+                                                    <a asp-area="Accounting" asp-controller="EmployeeDetails" asp-action="Index" asp-route-sortOrder="@ViewData["Col3SortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Amount</a>
+                                                </th>
+                                                <th>
+                                                    <a asp-area="Accounting" asp-controller="EmployeeDetails" asp-action="Index" asp-route-sortOrder="@ViewData["Col4SortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Currency</a>
+                                                </th>
+                                                <th>
+                                                    <a asp-area="Accounting" asp-controller="EmployeeDetails" asp-action="Index" asp-route-sortOrder="@ViewData["Col5SortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Remaining</a>
+                                                </th>
+                                                <th>
+                                                    <a asp-area="Accounting" asp-controller="EmployeeDetails" asp-action="Index" asp-route-sortOrder="@ViewData["Col6SortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Approved By</a>
+                                                </th>
+                                                <th>
+                                                    <a asp-area="Accounting" asp-controller="EmployeeDetails" asp-action="Index" asp-route-sortOrder="@ViewData["Col7SortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Adding Date</a>
+                                                </th>
+                                                <th></th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                            <tr>
+                                                <td class="mt-1 mb-1 pt-1 pb-1 align-middle">
+                                                    @Html.DisplayFor(modelItem => item.EmployeeName)
+                                                </td>
+                                                <td class="mt-1 mb-1 pt-1 pb-1 align-middle">
+                                                    @Html.DisplayFor(modelItem => item.PaymentReason)
+                                                </td>
+
+                                                <td class="mt-1 mb-1 pt-1 pb-1 align-middle">
+                                                    @Html.DisplayFor(modelItem => item.Ammount)
+                                                </td>
+                                                <td class="mt-1 mb-1 pt-1 pb-1 align-middle">
+                                                    @Html.DisplayFor(modelItem => item.Currency)
+                                                </td>
+                                                <td class="mt-1 mb-1 pt-1 pb-1 align-middle">
+                                                    @Html.DisplayFor(modelItem => item.Remaining)
+                                                </td>
+                                                <td class="mt-1 mb-1 pt-1 pb-1 align-middle">
+                                                    @Html.DisplayFor(modelItem => item.ApprovedBy)
+                                                </td>
+                                                <td class="mt-1 mb-1 pt-1 pb-1 align-middle">
+                                                    @Html.DisplayFor(modelItem => item.AddingDate)
+                                                </td>
+
+                                                <td class="mt-1 mb-1 pt-1 pb-1 align-middle">
+                                                    <div class="tools">
+                                                        @*   <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary  btn-sm"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>*@
+                                                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-success  btn-sm"><i class="fa fa-list" data-toggle="tooltip" data-placement="top" title="Details"></i></a>
+                                                        @*   <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger  btn-sm"><i class="fa fa-trash" data-toggle="tooltip" data-placement="top" title="Delete"></i></a>*@
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

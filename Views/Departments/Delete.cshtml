@@ -1,0 +1,64 @@
+﻿@model SamaERP.Models.ACCDepartments
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="right_col" role="main">
+
+
+    <form asp-area="Accounting" asp-controller="Departments" asp-action="Delete" class="pull-left">
+        <input type="hidden" asp-for="Id" />
+        <input style="font-size:small;" type="submit" value="Delete" class="btn btn-danger mb-0" />
+    </form>
+    <table class="table table-bordered table-striped" width="100%">
+        <tr>
+            <td width="15%">
+                <label style="font-size:medium;font-weight:500;">Department  Name :</label>
+            </td>
+            <td colspan="3">
+                <strong style="font-size:medium;font-weight:700;color:black;">  @Html.DisplayFor(model => model.DepartmentName)</strong>
+            </td>
+
+        </tr>
+        <tr>
+            <td width="15%">
+                <label style="font-size:medium;font-weight:500;">Disciption :</label>
+            </td>
+            <td colspan="3">
+                <strong style="font-size:medium;font-weight:700;color:black;">  @Html.DisplayFor(model => model.Disciption)</strong>
+            </td>
+
+        </tr>
+
+        <tr>
+            <td width="15%">
+                <label style="font-size:medium;font-weight:500;">Added by  :</label>
+            </td>
+            <td width="35%">
+                <strong style="font-size: medium; font-weight: 700; color: black; ">    @Html.DisplayFor(model => model.AddedBy)</strong>
+            </td>
+            <td width="15%">
+                <label style="font-size:medium;font-weight:500;">Adding Date :</label>
+            </td>
+            <td width="35%">
+                <strong style="font-size: medium; font-weight: 700; color: black; ">    @Html.DisplayFor(model => model.AddingDate)</strong>
+
+            </td>
+        </tr>
+
+    </table>
+
+
+
+
+    <br />
+
+
+</div>
+
+
+
+

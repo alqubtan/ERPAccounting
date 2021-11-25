@@ -1,0 +1,86 @@
+﻿@model SamaERP.Models.ACCAdvancePayment
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="right_col" role="main">
+   
+
+
+        <br />
+        <table class="table table-bordered table-striped" width="100%">
+            <tr>
+                <td width="15%">
+                    <label style="font-size:medium;font-weight:500;">Employee  Name :</label>
+                </td>
+                <td colspan="3">
+                    <strong style="font-size:medium;font-weight:700;color:black;">  @Html.DisplayFor(model => model.EmployeeName)</strong>
+                </td>
+
+            </tr>
+            <tr>
+                <td width="15%">
+                    <label style="font-size:medium;font-weight:500;">Payment Reason :</label>
+                </td>
+                <td colspan="3">
+                    <strong style="font-size:medium;font-weight:700;color:black;">  @Html.DisplayFor(model => model.PaymentReason)</strong>
+                </td>
+
+            </tr>
+            <tr>
+                <td width="15%">
+                    <label style="font-size:medium;font-weight:500;">Amount  :</label>
+                </td>
+                <td width="35%">
+                    <strong style="font-size: medium; font-weight: 700; color: black; ">    @Html.DisplayFor(model => model.Ammount)</strong>
+                </td>
+                <td width="15%">
+                    <label style="font-size:medium;font-weight:500;">Currency :</label>
+                </td>
+                <td width="35%">
+                    <strong style="font-size: medium; font-weight: 700; color: black; ">    @Html.DisplayFor(model => model.Currency)</strong>
+
+                </td>
+            </tr>
+            <tr>
+                <td width="15%">
+                    <label style="font-size:medium;font-weight:500;">Approved By :</label>
+                </td>
+                <td colspan="3">
+                    <strong style="font-size: medium; font-weight: 700; color: black; ">   @Html.DisplayFor(model => model.ApprovedBy)</strong>
+
+                </td>
+
+            </tr>
+            <tr>
+                <td width="15%">
+                    <label style="font-size:medium;font-weight:500;">Added by  :</label>
+                </td>
+                <td width="35%">
+                    <strong style="font-size: medium; font-weight: 700; color: black; ">    @Html.DisplayFor(model => model.AddedBy)</strong>
+                </td>
+                <td width="15%">
+                    <label style="font-size:medium;font-weight:500;">Adding Date :</label>
+                </td>
+                <td width="35%">
+                    <strong style="font-size: medium; font-weight: 700; color: black; ">    @Html.DisplayFor(model => model.AddingDate)</strong>
+
+                </td>
+            </tr>
+
+
+         
+
+
+        </table>
+
+
+  
+
+    <br />
+
+
+</div>

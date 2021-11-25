@@ -1,0 +1,466 @@
+﻿@model SamaERP.ViewModels.PurchasesVM
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="right_col" role="main">
+    <div class="x_panel">
+
+        <div class="container" style="background-color:white;padding:20pt 30pt 20pt 30pt;border-style:solid;border-color:lightgray;border-width:1pt;">
+            <h6>Advance Payments Details</h6>
+            <div class="form-group" style="margin-bottom:0pt;">
+                <label>Employee  Name :</label>
+                @Html.DisplayFor(model => model.advancePayment.EmployeeName)
+                <input type="hidden" asp-for="advancePayment.EmployeeName" id="myEmployeeName" />
+                <input type="hidden" asp-for="advancePayment.Id" id="myEmployeeID" />
+                <input type="hidden" asp-for="advancePayment.Currency" id="myCurrency" />
+
+            </div>
+            <div class="form-group" style="margin-bottom:0pt;">
+                <label for="inputAddress"> Payment Reason :</label>
+                @Html.DisplayFor(model => model.advancePayment.PaymentReason)
+            </div>
+            <div class="form-row" style="margin-bottom:0pt;">
+                <div class="form-group col-md-3" style="margin-bottom:0pt;">
+                    <label for="inputEmail4">Amount :</label>
+                    @Html.DisplayFor(model => model.advancePayment.Ammount)
+                </div>
+                <div class="form-group col-md-3" style="margin-bottom:0pt;">
+                    <label>Remaining :</label>
+                    <input type="number" asp-for="advancePayment.Remaining" readonly style="background-color:transparent; border-style:none;border-color:transparent;width:100px;" id="RemainingMode" />
+                    <input type="hidden" asp-for="advancePayment.Remaining" id="myRemaining" />
+                    <input type="hidden" asp-for="advancePayment.Ammount" id="myAmmount" />
+                </div>
+                <div class="form-group col-md-3" style="margin-bottom:0pt;">
+                    <label for="inputPassword4">Currency :</label>
+                    @Html.DisplayFor(model => model.advancePayment.Currency)
+                </div>
+            </div>
+            <div class="form-row" style="margin-bottom:0pt;">
+                <div class="form-group col-md-6" style="margin-bottom:0pt;">
+                    <label for="inputEmail4">Approved By :</label>
+                    @Html.DisplayFor(model => model.advancePayment.ApprovedBy)
+                </div>
+
+                <div class="form-group col-md-6" style="margin-bottom:0pt;">
+                    <label for="inputPassword4">Adding Date :</label>
+                    @Html.DisplayFor(model => model.advancePayment.AddingDate)
+                </div>
+            </div>
+        </div>
+        <div class="container mt-2" style="background-color:white;padding:20pt 30pt 20pt 30pt;border-style:solid;border-color:lightgray;border-width:1pt;">
+
+            <h6>Purchase Details</h6>
+            <table>
+
+                <tr>
+                    <td colspan="5" style="font-size:small;">Suplier Name</td>
+                    <td colspan="5" style="font-size:small;">Item Name</td>
+                </tr>
+                <tr>
+                    <td colspan="5" style="font-size:small;">
+                        <select id="IdSuplierNamw" required asp-items="@ViewBag.SupliersList" style="text-align:left;font-size:small;" class="form-control btn btn-secondary">
+                            <option value="">-- Choose Suplier --</option>
+                        </select>
+                    </td>
+                    <td colspan="5" style="font-size:small;"><input id="IdItemName" required type="text" class="form-control" placeholder=""></td>
+                </tr>
+                <tr>
+                    <td style="font-size:small;">Purchase No</td>
+                    <td style="font-size:small;">Pruchase Date</td>
+                    <td style="font-size: small;width: 60pt;">Qty</td>
+                    <td style="font-size:small;width:80pt;">Price</td>
+                    <td style="font-size:small;width:100pt;">Total Price</td>
+                    <td style="font-size:small;width:50pt;">Currency</td>
+                    <td style="font-size:small;width:100pt; ">Exchange Rate</td>
+                    <td style="font-size:small;width:100pt;"> Exchange Result</td>
+                    <td style="font-size:small;width:50pt;">Currency</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td style="font-size:small;"><input id="IdPurchaseNo" type="text" value="0" class="form-control"></td>
+                    <td style="font-size:small;"><input id="IDOruchaseDate" value="@DateTime.UtcNow.AddHours(3)" required type="date" class="form-control"></td>
+                    <td style="font-size:small;"><input id="IdQty" onchange="CalculateTotal()" type="number" required value="1" class="form-control" placeholder=""></td>
+                    <td style="font-size:small;"><input id="IdPrice" onchange="CalculateTotal()" type="number" required value="1" class="form-control"></td>
+                    <td style="font-size:small;"><input id="IdTotalPrice" type="number" readonly value="1" class="form-control" placeholder=""></td>
+                    <td style="font-size:small;">
+                        <select id="IdCurrency" onchange="ResetValuse(this.value)" required style="text-align: left; font-size: small;width:60pt;" class="form-control btn btn-secondary">
+                            <option value="">---</option>
+                            <option value="USD"> USD</option>
+                            <option value="IQD"> IQD</option>
+                        </select>
+                    </td>
+                    <td style="font-size:small;"><input id="IdExchangeRate" onchange="ExchangeRateChanged(this.value)" required type="number" value="0" class="form-control"></td>
+                    <td style="font-size:small;"><input id="IdOtherSum" type="number" value="0" readonly class="form-control"></td>
+                    <td style="font-size:small;"><input id="IdOtherCurrency" readonly type="text" class="form-control"></td>
+                    <td style="font-size:small;"><input id="btnAdd" type="button" class="btn btn-secondary" value="Add" onclick="AddItem()"></td>
+                </tr>
+            </table>
+        </div>
+        <table id="PlanningWareHouseItems" class="table table-bordered table-striped" style="margin: 10pt 0pt 10pt 0pt; ">
+            <thead>
+                <tr class="btn-secondary"style="color:white;" >
+                    <td style="font-size: small; word-wrap: break-word;text-align:center;">Suplier Name</td>
+                    <td style="font-size: small; word-wrap: break-word; text-align: center;">Item Name</td>
+                    <td style="font-size: small; word-wrap: break-word; width: 80px; text-align: center;">No</td>
+                    <td style="font-size: small; word-wrap: break-word; width: 80px; text-align: center;">Date</td>
+                    <td style="font-size: small; word-wrap: break-word; width: 60px; text-align: center;">Qty</td>
+                    <td style="font-size: small; word-wrap: break-word; width: 80px; text-align: center;">Price</td>
+                    <td style="font-size: small; word-wrap: break-word; width: 100px; text-align: center;">Total Price</td>
+                    <td style="font-size: small; word-wrap: break-word; width: 40px; text-align: center;">Currency</td>
+                    <td style="font-size: small; word-wrap: break-word; width: 100px; text-align: center;">Ex Rate</td>
+                    <td style="font-size: small; word-wrap: break-word; width: 100px; text-align: center;"> Ex Result</td>
+                    <td style="font-size: small; word-wrap: break-word; width: 40px; text-align: center;">Currency</td>
+                    <td style="font-size: small; word-wrap: break-word; width: 40px; text-align: center;"></td>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <br />
+</div>
+
+<div class="modal fade" id="myMSGResult" tabindex="-1" role="dialog" aria-labelledby="myMSGResult-label">
+    <div class="modal-dialog modal-df" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myMSGResult-label"></h4>
+            </div>
+            <div class="modal-body" style="direction:rtl;">
+                <p id="planMSGBody"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" style="font-size:large;" class="btn btn-default" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+     
+        $.ajax({
+                url: '@Url.Action("GetPartialDetails", "Purchases",new { area= "Accounting" })', // "/PlanningProccess/PartialDetails",
+                type: "POST",
+                dataType: "json",
+                cache: false,
+                data: {
+                    EmployeeID: $('#myEmployeeID').val(),
+
+
+                },
+                success: function (data) {
+                    if (data)
+                    {
+                        var obj = JSON.stringify(data);
+                     //   alert(obj);
+                        var obb2 = $.parseJSON(obj);
+                      //  alert(obb2.length);
+                        for (var item in obb2) {
+                         //   alert(JSON.stringify(obb2[item]));
+                            AddNewItemInit(obb2[item]);
+                        }
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+
+
+                }
+        });
+
+
+
+    }, false);
+
+  
+    function AddItem()
+    {
+        var _supplyer = $('#IdSuplierNamw').val();
+        var _item = $('#IdItemName').val();
+        var _date = $('#IDOruchaseDate').val();
+        var _qty = $('#IdQty').val();
+        var _price = $('#IdPrice').val();
+        var _Exchange = $('#IdExchangeRate').val();
+        var _currency = $('#IdCurrency').val();
+        var _total = $('#IdTotalPrice').val();
+        var _totalOther = $('#IdOtherCurrency').val();
+
+
+        if (_supplyer == "" || _supplyer == null || _item == "" || _item == null || _date == "" || _date == null
+            || _qty == 0 || _qty == null || _price == 0 || _price == null || _Exchange == 0 || _Exchange == null || _currency == "" || _currency == null
+            || _total == 0 || _total == null || _totalOther == 0 || _totalOther == null
+        )
+        {
+            var msg = 'Please Full ALL Fields ';
+            $('#myMSGResult-label').text('Warning');
+            $('#planMSGBody').text(msg);
+            $('#myMSGResult').modal('show');
+
+        } else {
+
+            $.ajax({
+                url: '@Url.Action("PartialDetails", "Purchases", new { area = "Accounting" })', // "/PlanningProccess/PartialDetails",
+                type: "POST",
+                dataType: "json",
+                cache: false,
+                data: {
+                    SuplierName: $('#IdSuplierNamw').val(),
+                    EmployeeName: $('#myEmployeeName').val(),
+                    ItemName: $('#IdItemName').val(),
+                    PurchaseNo: $('#IdPurchaseNo').val(),
+                    PruchaseDate: $('#IDOruchaseDate').val(),
+                    PurchaseID: $('#myEmployeeID').val(),
+                    Qty: $('#IdQty').val(),
+                    Price: $('#IdPrice').val(),
+                    TotalPrice: $('#IdTotalPrice').val(),
+                    ExchangeRate: $('#IdExchangeRate').val(),
+                    TotalOtherCurrency: $('#IdOtherSum').val(),
+                    Currency: $('#IdCurrency').val(),
+                    OtherCurrency: $('#IdOtherCurrency').val(),
+                    EmployeeID: $('#myEmployeeID').val()
+                },
+                success: function (data) {
+                    if (data) {
+
+                        var obj = JSON.stringify(data);
+
+                        var obb2 = $.parseJSON(obj);
+                        AddNewItem(obb2);
+
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+
+                    //   $('#PleaseWaitModal').modal('hide');
+                    var msg = 'الرجاء التاكد من اختيار المادة ';
+                    $('#myMSGResult-label').text('تحذير');
+                    $('#planMSGBody').text(msg);
+                    $('#myMSGResult').modal('show');
+                    $('#TotalPriceForWareHouse').text('أضغط على زر الأصفر لحساب إجمالي السعر');
+                    $('#TotlalPriceForEverything').text('لم يتم حساب الكلفة التخمينية ');
+                    $('#PleaseWaitModal').modal('hide');
+                }
+
+            });
+
+        }
+
+
+    }
+
+     var TotalWareHousePrice = 0;
+    var x = 0;
+    //PlanningTotalAmmount
+    function AddNewItem(obb2) {
+
+          var _htmltrStart = '<tr id="R' + x + '">';
+        var _tdClass = '<td class="'
+        var _htmltdStart = '" style="text-align:left;padding-left:1px;padding-right:1px;padding-top:0px;padding-bottom:0px;vertical-align:middle;font-size: small; word-wrap: break-word;text-align:center;">';
+        var _htmltdEnd = '</td >';
+        var _htmltrEnd = '</tr >';
+        var _suplierName = obb2.suplierName;
+        var _employeeName = obb2.employeeName;
+        var _itemName = obb2.itemName;
+        var _purchaseNo = obb2.purchaseNo;
+
+        var _pruchaseDate = (obb2.pruchaseDate).replace("T00:00:00", "");
+        var _qty = obb2.qty.toFixed(2);
+        var _price = obb2.price.toFixed(2);
+        var _totalPrice = obb2.totalPrice.toFixed(2);
+        var _exchangeRate = obb2.exchangeRate;
+        var _totalOtherCurrency = obb2.totalOtherCurrency;
+        var _currency = obb2.currency;
+        var _otherCurrency = obb2.otherCurrency;
+
+        if (x !== null && x !== '') {
+            var _cell1 = _tdClass + 'td_suplierName' + _htmltdStart + _suplierName + _htmltdEnd;
+          /*  var _cell2 = _tdClass + 'td_employeeName' + _htmltdStart + _employeeName + _htmltdEnd;*/
+            var _cell3 = _tdClass + 'td_itemName' + _htmltdStart + _itemName + _htmltdEnd;
+            var _cell4 = _tdClass + 'td_purchaseNo' + _htmltdStart + _purchaseNo + _htmltdEnd;
+            var _cell5 = _tdClass + 'td_pruchaseDate' + _htmltdStart + _pruchaseDate + _htmltdEnd;
+            var _cell6 = _tdClass + 'td_qty' + _htmltdStart + _qty + _htmltdEnd;
+            var _cell7 = _tdClass + 'td_price' + _htmltdStart + _price + _htmltdEnd;
+            var _cell8 = _tdClass + 'td_totalPrice' + _htmltdStart + _totalPrice + _htmltdEnd;
+            var _cell9 = _tdClass + 'td_exchangeRate' + _htmltdStart + _exchangeRate + _htmltdEnd;
+            var _cell10 = _tdClass + 'td_currency' + _htmltdStart + _currency + _htmltdEnd;
+            var _cell11 = _tdClass + 'td_totalOtherCurrency' + _htmltdStart + _totalOtherCurrency + _htmltdEnd;
+            var _cell12 = _tdClass + 'td_otherCurrency' + _htmltdStart + _otherCurrency + _htmltdEnd;
+
+
+
+            var _cell13 = _htmltdStart + ' <td style="text-align:center;padding-left:1px;padding-right:1px;padding-top:0px;padding-bottom:0px;vertical-align:middle;font-size: small;"><input type="button" value="Del"  class="btn  btn-danger" onclick="deleteRow(this,'+ obb2.id +')"/></td>' + _htmltdEnd;
+
+            var _all = _cell1 + _cell3 + _cell4 + _cell5 + _cell6 + _cell7 + _cell8 + _cell10 + _cell9 + _cell11 + _cell12 + _cell13;
+            $('#PlanningWareHouseItems tr:last').after(_htmltrStart + _all + _htmltrEnd);
+                //    TotalPricess();
+                    $('#IdItemName').val('');
+            $('#IdQty').val(1);
+            $('#IdPrice').val(1);
+            $('#IdTotalPrice').val(1);
+            $('#IdExchangeRate').val(0);
+            $('#IdOtherSum').val(0);
+
+            $('#IdOtherCurrency').val('');
+            var _current = $('#RemainingMode').val();
+            $('#RemainingMode').val(_current - obb2.totalPrice );
+            $('#IdItemName').focus();
+
+
+        } else {
+            $('#myMSGResult-label').text('Warning');
+            var MSGG = 'Please Choose Item';
+            $('#planMSGBody').text(MSGG);
+
+            $('#myMSGResult').modal('show');
+
+        }
+
+
+    }
+
+    function CalculateTotal() {
+
+        var Qty = $('#IdQty').val();
+        var price = $('#IdPrice').val();
+        if (Qty == 0 || price == 0) {
+            alert('Please Check Price Or Qty');
+
+        } else {
+
+            var _totalprics = Qty * price;
+            var _current = $('#RemainingMode').val();
+            if (_totalprics > _current) {
+                $('#IdQty').val(1);
+                $('#IdPrice').val(1);
+                $('#IdTotalPrice').val(1);
+                $('#IdQty').focus();
+                $('#myMSGResult-label').text('Warning');
+                var MSGG = 'The Remaining Advance Payment less than Item Total Price';
+                $('#planMSGBody').text(MSGG);
+
+                $('#myMSGResult').modal('show');
+
+            } else {
+                $('#IdTotalPrice').val((Qty * price).toFixed(2));
+            }
+
+        }
+    }
+    function ExchangeRateChanged(val) {
+        if (val > 0) {
+            var Curr = $('#IdCurrency').val();
+            if (Curr == "USD") {
+                var totalPrice = $('#IdTotalPrice').val();
+                $('#IdOtherSum').val(totalPrice * val);
+                $('#IdOtherCurrency').val('IQD');
+
+            } else {
+                var totalPrice = $('#IdTotalPrice').val();
+                var result = (totalPrice / val).toFixed(2);
+                $('#IdOtherSum').val(result);
+                $('#IdOtherCurrency').val('USD');
+
+            }
+        } else {
+            alert('Please Check Exchange Rate Value');
+        }
+    }
+    function ResetValuse(val) {
+        $('#IdExchangeRate').val('0');
+        $('#IdOtherSum').val('0');
+        $('#IdOtherCurrency').val('');
+
+    }
+
+    function AddNewItemInit(obb2) {
+
+        //   alert(obb2.itemName);
+        var _htmltrStart = '<tr id="R' + x + '">';
+        var _tdClass = '<td class="'
+        var _htmltdStart = '" style="text-align:left;padding-left:1px;padding-right:1px;padding-top:0px;padding-bottom:0px;vertical-align:middle;font-size: small; word-wrap: break-word;text-align:center;">';
+        var _htmltdEnd = '</td >';
+        var _htmltrEnd = '</tr >';
+        var _suplierName = obb2.suplierName;
+        var _itemName = obb2.itemName;
+        var _purchaseNo = obb2.purchaseNo;
+        var _pruchaseDate = (obb2.pruchaseDate).replace("T00:00:00", "");
+        var _qty = obb2.qty.toFixed(2);
+        var _price = obb2.price.toFixed(2);
+        var _totalPrice = obb2.totalPrice.toFixed(2);
+        var _exchangeRate = obb2.exchangeRate;
+        var _totalOtherCurrency = obb2.totalOtherCurrency;
+        var _currency = obb2.currency;
+        var _otherCurrency = obb2.otherCurrency;
+
+        var _cell1 = _tdClass + 'td_suplierName' + _htmltdStart + _suplierName + _htmltdEnd;
+        /*  var _cell2 = _tdClass + 'td_employeeName' + _htmltdStart + _employeeName + _htmltdEnd;*/
+        var _cell3 = _tdClass + 'td_itemName' + _htmltdStart + _itemName + _htmltdEnd;
+        var _cell4 = _tdClass + 'td_purchaseNo' + _htmltdStart + _purchaseNo + _htmltdEnd;
+        var _cell5 = _tdClass + 'td_pruchaseDate' + _htmltdStart + _pruchaseDate + _htmltdEnd;
+        var _cell6 = _tdClass + 'td_qty' + _htmltdStart + _qty + _htmltdEnd;
+        var _cell7 = _tdClass + 'td_price' + _htmltdStart + _price + _htmltdEnd;
+        var _cell8 = _tdClass + 'td_totalPrice' + _htmltdStart + _totalPrice + _htmltdEnd;
+        var _cell9 = _tdClass + 'td_exchangeRate' + _htmltdStart + _exchangeRate + _htmltdEnd;
+        var _cell10 = _tdClass + 'td_currency' + _htmltdStart + _currency + _htmltdEnd;
+        var _cell11 = _tdClass + 'td_totalOtherCurrency' + _htmltdStart + _totalOtherCurrency + _htmltdEnd;
+        var _cell12 = _tdClass + 'td_otherCurrency' + _htmltdStart + _otherCurrency + _htmltdEnd;
+
+
+
+        var _cell13 = _htmltdStart + ' <td style="text-align:center;padding-left:1px;padding-right:1px;padding-top:0px;padding-bottom:0px;vertical-align:middle;font-size: small;"><input type="button" value="Del"  class="btn  btn-danger" onclick="deleteRow(this,'+ obb2.id +')"/></td>' + _htmltdEnd;
+        var _all = _cell1 + _cell3 + _cell4 + _cell5 + _cell6 + _cell7 + _cell8 + _cell10 + _cell9 + _cell11 + _cell12 + _cell13;
+        $('#PlanningWareHouseItems tr:last').after(_htmltrStart + _all + _htmltrEnd);
+
+
+    }
+       function deleteRow(btn, id)
+       {      
+        $.ajax({
+            url: '@Url.Action("DeleteRow", "Purchases", new { area = "Accounting" })',//"/PlanningProccess/DeleteRow",
+            type: "POST",
+            dataType: "json",
+            cache: false,
+            data: {
+                id: id
+            },
+            success: function (data) {
+                if (data) {
+
+                    var row = btn.parentNode.parentNode;
+                    row.parentNode.removeChild(row);
+                    var obj = JSON.stringify(data);
+
+                    var obb2 = $.parseJSON(obj);
+
+                    var _currentRem = parseFloat( $('#RemainingMode').val());
+                    var _deleted = parseFloat( obb2.totalPrice);
+
+                    var _total = _currentRem + _deleted;
+                    $('#RemainingMode').val(_total);
+
+
+
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+
+
+            }
+
+        });
+
+    }
+    function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    }
+
+</script>
+
+

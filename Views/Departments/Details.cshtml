@@ -1,0 +1,66 @@
+﻿@model SamaERP.Models.ACCDepartments
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="right_col" role="main">
+
+
+
+    <br />
+    <table class="table table-bordered table-striped" width="100%">
+        <tr>
+            <td width="15%">
+                <label style="font-size:medium;font-weight:500;">Department  Name :</label>
+            </td>
+            <td colspan="3">
+                <strong style="font-size:medium;font-weight:700;color:black;">  @Html.DisplayFor(model => model.DepartmentName)</strong>
+            </td>
+
+        </tr>
+        <tr>
+            <td width="15%">
+                <label style="font-size:medium;font-weight:500;">Disciption :</label>
+            </td>
+            <td colspan="3">
+                <strong style="font-size:medium;font-weight:700;color:black;">  @Html.DisplayFor(model => model.Disciption)</strong>
+            </td>
+
+        </tr>
+
+        <tr>
+            <td width="15%">
+                <label style="font-size:medium;font-weight:500;">Added by  :</label>
+            </td>
+            <td width="35%">
+                <strong style="font-size: medium; font-weight: 700; color: black; ">    @Html.DisplayFor(model => model.AddedBy)</strong>
+            </td>
+            <td width="15%">
+                <label style="font-size:medium;font-weight:500;">Adding Date :</label>
+            </td>
+            <td width="35%">
+                <strong style="font-size: medium; font-weight: 700; color: black; ">    @Html.DisplayFor(model => model.AddingDate)</strong>
+
+            </td>
+        </tr>
+
+    </table>
+
+
+
+
+    <br />
+
+
+</div>
+
+
+
+
+
+
+
+
+

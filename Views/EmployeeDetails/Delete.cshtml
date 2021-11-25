@@ -1,0 +1,105 @@
+﻿@model SamaERP.Models.ACCEmployeeDetails
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="right_col" role="main">
+
+
+    <form asp-area="Accounting" asp-controller="EmployeeDetails" asp-action="Delete" class="pull-left">
+        <input type="hidden" asp-for="Id" />
+        <input style="font-size:small;" type="submit" value="Delete" class="btn btn-danger mb-0" />
+    </form>
+
+    <div class="x_content">
+
+        <table class="table table-bordered table-striped" width="100%">
+            <tr>
+                <td width="15%">
+                    <label style="font-size:medium;font-weight:500;">Employee  Name :</label>
+                </td>
+                <td colspan="3">
+                    <strong style="font-size:medium;font-weight:700;color:black;">  @Html.DisplayFor(model => model.EmployeeName)</strong>
+                </td>
+
+            </tr>
+            <tr>
+                <td width="15%">
+                    <label style="font-size:medium;font-weight:500;">Phone Number :</label>
+                </td>
+                <td width="35%">
+                    <strong style="font-size: medium; font-weight: 700; color: black; ">    @Html.DisplayFor(model => model.PhoneNo)</strong>
+                </td>
+                <td width="15%">
+                    <label style="font-size:medium;font-weight:500;">E-mail :</label>
+                </td>
+                <td width="35%">
+                    <strong style="font-size: medium; font-weight: 700; color: black; ">    @Html.DisplayFor(model => model.Email)</strong>
+
+                </td>
+            </tr>
+            <tr>
+                <td width="15%">
+                    <label style="font-size:medium;font-weight:500;">Address :</label>
+                </td>
+                <td colspan="3">
+                    <strong style="font-size: medium; font-weight: 700; color: black; ">   @Html.DisplayFor(model => model.Addr)</strong>
+
+                </td>
+
+            </tr>
+            <tr>
+                <td width="15%">
+                    <label style="font-size: medium; font-weight: 500;"> Department :</label>
+                </td>
+                <td colspan="3">
+                    <strong style="font-size: medium; font-weight: 700; color: black; ">    @Html.DisplayFor(model => model.Department)</strong>
+
+                </td>
+
+            </tr>
+            <tr>
+                <td width="15%">
+                    <label style="font-size: medium; font-weight: 500;"> Job Title :</label>
+                </td>
+                <td colspan="3">
+                    <strong style="font-size: medium; font-weight: 700; color: black; ">    @Html.DisplayFor(model => model.JobTitle)</strong>
+
+                </td>
+
+            </tr>
+            <tr>
+                <td width="15%">
+                    <label style="font-size:medium;font-weight:500;"> Added By :</label>
+                </td>
+                <td width="35%">
+                    <strong style="font-size: medium; font-weight: 700; color: black; ">      @Html.DisplayFor(model => model.AddedBy)</strong>
+                </td>
+                <td width="15%">
+                    <label style="font-size:medium;font-weight:500;">Adding Time :</label>
+                </td>
+                <td width="35%">
+                    <strong style="font-size: medium; font-weight: 900; color: black;">    @Html.DisplayFor(model => model.AddingDate)</strong>
+                </td>
+            </tr>
+
+
+        </table>
+
+
+    </div>
+
+    <br />
+
+
+
+
+</div>
+
+
+
+
+
