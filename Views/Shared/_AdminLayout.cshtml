@@ -53,19 +53,27 @@
                     <!-- sidebar menu -->
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                         <div class="menu_section">
-                            <h3>General</h3>
+                            <h3>Masters</h3>
                             <ul class="nav side-menu">
                                 <li>
-                                    <a><i class="fa fa-money"></i> Payments <span class="fa fa-chevron-down"></span></a>
+                                    <a><i class="fa fa-bookmark"></i> Categories<span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a asp-controller="AdvancePayments" asp-action="Create">New Payment</a></li>
-                                        <li><a asp-controller="AdvancePayments" asp-action="Index">Payments List</a></li>
+                                        <li><a asp-controller="FixedCategories" asp-action="Create">New Category</a></li>
+                                        <li><a asp-controller="FixedCategories" asp-action="Index">Categories List</a></li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a><i class="fa fa-shopping-cart"></i> Purchases <span class="fa fa-chevron-down"></span></a>
+                                    <a><i class="fa fa-filter"></i> Expense Type<span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a asp-action="Index" asp-controller="Purchases">Purchases List</a></li>
+                                        <li><a asp-controller="ExpenseTypes" asp-action="Create">New Type</a></li>
+                                        <li><a asp-controller="ExpenseTypes" asp-action="Index">Types List</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-flag"></i> Brands <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a asp-controller="Brands" asp-action="Create">New Brand</a></li>
+                                        <li><a asp-controller="Brands" asp-action="Index">Brands List</a></li>
                                     </ul>
                                 </li>
                                 <li>
@@ -89,7 +97,51 @@
                                         <li><a asp-controller="EmployeeDetails" asp-action="Index">Employees List</a></li>
                                     </ul>
                                 </li>
+                            </ul>
+                        </div>
 
+
+                        <div class="menu_section">
+                            <h3>Purchases & Payments</h3>
+                            <ul class="nav side-menu">
+                                <li>
+                                    <a><i class="fa fa-money"></i> Payments <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a asp-controller="AdvancePayments" asp-action="Create">New Payment</a></li>
+                                        <li><a asp-controller="AdvancePayments" asp-action="Index">Payments List</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-shopping-cart"></i> Purchases <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a asp-action="Index" asp-controller="Purchases">Purchases List</a></li>
+                                    </ul>
+                                </li>
+                                
+                            </ul>
+                        </div>
+
+                        <div class="menu_section">
+                            <h3>Fixed Assets</h3>
+                            <ul class="nav side-menu">
+                                <li>
+                                    <a><i class="fa fa-building"></i> Fixed Assets <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a asp-controller="FixedAssets" asp-action="Create">New Asset</a></li>
+                                        <li><a asp-controller="FixedAssets" asp-action="Index">Assets List</a></li>
+                                    </ul>
+                                </li>                            </ul>
+                        </div>
+                        <div class="menu_section">
+                            <h3>Cash / Bank</h3>
+                            <ul class="nav side-menu">
+                                <li>
+                                    <a><i class="fa fa-university"></i>Cash / Bank <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a asp-controller="Expenses" asp-action="Create">New Expense</a></li>
+                                        <li><a asp-controller="Expenses" asp-action="Index">Expenses List</a></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </div>
 

@@ -18,6 +18,11 @@ namespace SamaERP.Data
         public DbSet<SamaERP.Models.ACCDepartments> Departments { get; set; }
         public DbSet<SamaERP.Models.ACCPurchases> ACCPurchases { get; set; }
         public DbSet<SamaERP.Models.ACCEmployeeDetails> ACCEmployeeDetails { get; set; }
+        public DbSet<SamaERP.Models.ACCFixedAssets> ACCFixedAssets { get; set; }
+        public DbSet<SamaERP.Models.ACCFixedCategory> ACCFixedCategory { get; set; }
+        public DbSet<SamaERP.Models.Brand> Brand { get; set; }
+        public DbSet<SamaERP.Models.Expense> Expense { get; set; }
+        public DbSet<SamaERP.Models.ExpenseType> ExpenseType { get; set; }
         
     }
 }

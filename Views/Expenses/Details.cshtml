@@ -1,0 +1,73 @@
+﻿@model SamaERP.Models.Expense
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="right_col" role="main">
+
+
+    <div class="clearfix"></div>
+
+
+
+    <br />
+    <table class="table table-bordered table-striped" width="100%">
+        <tr>
+            <td width="15%">
+                <label style="font-size:medium;font-weight:500;">Expense Type:</label>
+            </td>
+            <td colspan="3">
+                <strong style="font-size:medium;font-weight:700;color:black;">  @Html.DisplayFor(model => model.ExpenseType)</strong>
+            </td>
+
+        </tr>
+        <tr>
+            <td width="15%">
+                <label style="font-size:medium;font-weight:500;">Payment Account :</label>
+            </td>
+            <td width="35%">
+                <strong style="font-size: medium; font-weight: 700; color: black; ">    @Html.DisplayFor(model => model.PaymentAccount)</strong>
+            </td>
+            <td width="15%">
+                <label style="font-size:medium;font-weight:500;">Expense Date :</label>
+            </td>
+            <td width="35%">
+                <strong style="font-size: medium; font-weight: 700; color: black; ">    @Html.DisplayFor(model => model.ExpenseData)</strong>
+
+            </td>
+        </tr>
+        <tr>
+            <td width="15%">
+                <label style="font-size:medium;font-weight:500;">Amount :</label>
+            </td>
+            <td colspan="3">
+                <strong style="font-size: medium; font-weight: 700; color: black; ">   @Html.DisplayFor(model => model.Amount)</strong>
+
+            </td>
+
+        </tr>
+        <tr>
+            <td width="15%">
+                <label style="font-size: medium; font-weight: 500;"> Currency :</label>
+            </td>
+            <td colspan="3">
+                <strong style="font-size: medium; font-weight: 700; color: black; ">    @Html.DisplayFor(model => model.Currency)</strong>
+
+            </td>
+
+        </tr>
+      
+        
+
+
+    </table>
+
+
+
+
+    <br />
+
+
+</div>

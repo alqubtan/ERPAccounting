@@ -1,0 +1,100 @@
+﻿@model IEnumerable<SamaERP.Models.Expense>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h2>Sama ERP <small>Expenses</small></h2>
+            </div>
+            <form asp-controller="Expenses" asp-action="Index" method="get">
+                <div class="title_right">
+                    <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                        <div class="input-group">
+                            <input name="SearchString" type="text" class="form-control" value="@ViewData["CurrentFilter"]" placeholder="Search for...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-secondary" type="submit">Search</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <a style="font-size:small;" class="btn btn-secondary pb-2 mb-0" asp-controller="Expenses" asp-action="Create"> Add New Expense <span class="fa fa-pencil"></span></a>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 ">
+                <div class="x_panel">
+
+                    <div class="x_content">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card-box table-responsive">
+                                    <table class="table table-bordered table-striped">
+                                        <thead style="background-color:white;">
+                                            <tr>
+                                                <th>
+                                                    <a asp-area="Expenses" asp-controller="Expenses" asp-action="Index" asp-route-sortOrder="@ViewData["Col1SortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Expense Type</a>
+                                                </th>
+                                                <th>
+                                                    <a asp-area="Expenses" asp-controller="Expenses" asp-action="Index" asp-route-sortOrder="@ViewData["Col2SortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Payment Account</a>
+                                                </th>
+                                                <th>
+                                                    <a asp-area="Expenses" asp-controller="Expenses" asp-action="Index" asp-route-sortOrder="@ViewData["Col3SortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Data</a>
+                                                </th>
+                                                <th>
+                                                    <a asp-area="Expenses" asp-controller="Expenses" asp-action="Index" asp-route-sortOrder="@ViewData["Col4SortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Amount</a>
+                                                </th>
+                                                <th>
+                                                    <a asp-area="Expenses" asp-controller="Expenses" asp-action="Index" asp-route-sortOrder="@ViewData["Col4SortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Currency</a>
+                                                </th>
+
+                                                <th></th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                            <tr>
+                                                <td class="mt-1 mb-1 pt-1 pb-1 align-middle">
+                                                    @Html.DisplayFor(modelItem => item.ExpenseType)
+                                                </td>
+                                                <td class="mt-1 mb-1 pt-1 pb-1 align-middle">
+                                                    @Html.DisplayFor(modelItem => item.PaymentAccount)
+                                                </td>
+
+                                                <td class="mt-1 mb-1 pt-1 pb-1 align-middle">
+                                                    @Html.DisplayFor(modelItem => item.ExpenseData)
+                                                </td>
+                                                <td class="mt-1 mb-1 pt-1 pb-1 align-middle">
+                                                    @Html.DisplayFor(modelItem => item.Amount)
+                                                </td>
+                                                <td class="mt-1 mb-1 pt-1 pb-1 align-middle">
+                                                    @Html.DisplayFor(modelItem => item.Currency)
+                                                </td>
+
+
+                                                <td class="mt-1 mb-1 pt-1 pb-1 align-middle">
+                                                    <div class="tools">
+                                                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-success  btn-sm"><i class="fa fa-list" data-toggle="tooltip" data-placement="top" title="Details"></i></a>
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

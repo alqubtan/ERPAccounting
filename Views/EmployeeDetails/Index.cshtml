@@ -11,7 +11,23 @@
 <div class="right_col" role="main">
     <div class="">
 
-
+        <div class="page-title">
+            <div class="title_left">
+                <h2>Sama ERP <small>Employees</small></h2>
+            </div>
+            <form asp-area="EmployeeDetails" asp-controller="EmployeeDetails" asp-action="Index" method="get">
+                <div class="title_right">
+                    <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                        <div class="input-group">
+                            <input name="SearchString" type="text" class="form-control" value="@ViewData["CurrentFilter"]" placeholder="Search for...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-secondary" type="submit">Search</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
         <a style="font-size:small;" class="btn btn-secondary pb-2 mb-0" asp-area="Accounting" asp-controller="EmployeeDetails" asp-action="Create"> Add New Employee <span class="fa fa-pencil"></span></a>
 
         <div class="row">
